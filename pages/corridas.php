@@ -23,7 +23,7 @@
                     <?php
                         $motoristas = $db->query("SELECT * FROM tb_motorista WHERE status = 1 ORDER BY nome");
                         while ($motorista = $motoristas->fetch_array(MYSQLI_ASSOC)) {
-                            echo "<option value='" . $motorista["id"] . "'>" . $motorista["nome"] . " - " . format_string($motorista["cpf"], "###.###.###-##") . "</option>";
+                            echo "<option value='" . $motorista["id"] . "'>" . $motorista["nome"] . " - " . $motorista["cpf"] . "</option>";
                         }
                         $motoristas->free_result();
                     ?>
@@ -37,7 +37,7 @@
                     <?php
                         $passageiros = $db->query("SELECT * FROM tb_passageiro ORDER BY nome");
                         while ($passageiro = $passageiros->fetch_array(MYSQLI_ASSOC)) {
-                            echo "<option value='" . $passageiro["id"] . "'>" . $passageiro["nome"] . " - " . format_string($passageiro["cpf"], "###.###.###-##") . "</option>";
+                            echo "<option value='" . $passageiro["id"] . "'>" . $passageiro["nome"] . " - " . $passageiro["cpf"] . "</option>";
                         }
                         $passageiros->free_result();
                     ?>
