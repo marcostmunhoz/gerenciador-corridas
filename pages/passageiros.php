@@ -85,7 +85,7 @@
                 <?php
                     $result = $db->query("SELECT * FROM tb_passageiro ORDER BY nome");
                     $index = 1;
-                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                    while ($row = $result->fetch_array()) {
                         print_r($row . <br>);
                         /* echo "<tr><th scope='row'>" . $index++ . "</th>";
                         echo "<td>" . format_string($row["cpf"], "###.###.###-##") . "</td>";
