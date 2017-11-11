@@ -7,7 +7,7 @@
     define("DB_LOGIN", "b7c929ef6f1a1f");
     define("DB_PASSWD", "fe8607a4");
 
-    function format_string(string $str, string $mask) {
+    function format_string($str, string $mask) {
         $result = "";
         $counter = 0;
         for ($i = 0; $i < strlen($mask); $i++) {
