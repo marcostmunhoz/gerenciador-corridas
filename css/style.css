@@ -1,0 +1,6 @@
+.form-horizontal .btn-primary {
+    margin-right: 15px;
+}
+form legend, .checkbox > label {
+    font-weight: bold;
+}
