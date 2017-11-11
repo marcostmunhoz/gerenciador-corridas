@@ -84,6 +84,8 @@
             <tbody>
                 <?php
                     $result = $db->query("SELECT * FROM tb_passageiro ORDER BY nome");
+                    print_r($db);
+                    print_r($result);
                     $index = 1;
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         echo "<tr><th scope='row'>" . $index++ . "</th>";
