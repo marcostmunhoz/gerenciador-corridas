@@ -87,7 +87,7 @@
                     $index = 1;
                     while ($row = $result->fetch_object()) {
                         echo "<tr><th scope='row'>" . $index++ . "</th>";
-                        #echo "<td>" . format_string((string)($row->cpf), "###.###.###-##") . "</td>";
+                        echo "<td>" . format_string(strval($row->cpf)), "###.###.###-##") . "</td>";
                         echo "<td>" . $row->nome . "</td>";
                         echo "<td>" . ($row->sexo == "M" ? "Masculino" : "Feminino") . "</td>";
                         echo "<td>" . date("d/m/Y", strtotime($row->data_nasc)) . "</td>";
