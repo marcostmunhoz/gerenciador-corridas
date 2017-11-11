@@ -88,6 +88,7 @@
                     print_r($result);
                     $index = 1;
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                        print_r($row);
                         echo "<tr><th scope='row'>" . $index++ . "</th>";
                         echo "<td>" . format_string($row["cpf"], "###.###.###-##") . "</td>";
                         echo "<td>" . $row["nome"] . "</td>";
