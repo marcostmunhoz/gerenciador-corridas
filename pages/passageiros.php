@@ -86,12 +86,11 @@
                     $result = $db->query("SELECT * FROM tb_passageiro ORDER BY nome");
                     $index = 1;
                     while ($row = $result->fetch_object()) {
-                        print_r($row . "<br>");
-                        /* echo "<tr><th scope='row'>" . $index++ . "</th>";
-                        echo "<td>" . format_string($row["cpf"], "###.###.###-##") . "</td>";
-                        echo "<td>" . $row["nome"] . "</td>";
-                        echo "<td>" . ($row["sexo"] == "M" ? "Masculino" : "Feminino") . "</td>";
-                        echo "<td>" . date("d/m/Y", strtotime($row["data_nasc"])) . "</td>"; */
+                        echo "<tr><th scope='row'>" . $index++ . "</th>";
+                        echo "<td>" . format_string($row->cpf, "###.###.###-##") . "</td>";
+                        echo "<td>" . $row->nome . "</td>";
+                        echo "<td>" . ($row->sexo == "M" ? "Masculino" : "Feminino") . "</td>";
+                        echo "<td>" . date("d/m/Y", strtotime($row->data_nasc)) . "</td>";
                     }
                     $result->close();
                 ?>
