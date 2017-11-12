@@ -30,7 +30,7 @@
         </div>
     </div>
 </div>
-<form method="POST" class="form-horizontal" id="cadastrar_form">
+<form method="POST" class="form-horizontal">
     <fieldset>
         <legend>Cadastrar passageiro</legend>
         <div class="form-group">

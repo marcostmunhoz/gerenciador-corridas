@@ -4,3 +4,9 @@
 form legend, .checkbox > label {
     font-weight: bold;
 }
+.child_row > td {
+    padding: 0px !important;
+}
+.child_row > td > table {
+    margin: 0px;
+}

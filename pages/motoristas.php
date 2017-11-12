@@ -113,14 +113,14 @@
                 <?php
                     $result = $db->query("SELECT * FROM tb_motorista ORDER BY status DESC, nome");
                     $index = 1;
-                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                    while ($row = $result->fetch_object()) {
                         echo "<tr><th scope='row'>" . $index++ . "</th>";
-                        echo "<td>" . $row["cpf"] . "</td>";
-                        echo "<td>" . $row["nome"] . "</td>";
-                        echo "<td>" . ($row["sexo"] == "M" ? "Masculino" : "Feminino") . "</td>";
-                        echo "<td>" . date("d/m/Y", strtotime($row["data_nasc"])) . "</td>";
-                        echo "<td>" . $row["modelo_veic"] . "</td>";
-                        echo "<td class='text-center'><input type='checkbox' " . ($row["status"] == 1 ? "checked" : "") . " data-cpf='" . $row["cpf"] . "'></td>"; 
+                        echo "<td>" . $row->cpf . "</td>";
+                        echo "<td>" . $row->nome . "</td>";
+                        echo "<td>" . ($row->sexo == "M" ? "Masculino" : "Feminino") . "</td>";
+                        echo "<td>" . date("d/m/Y", strtotime($row->data_nasc)) . "</td>";
+                        echo "<td>" . $row->modelo_veic . "</td>";
+                        echo "<td class='text-center'><input type='checkbox' " . ($row->status == 1 ? "checked" : "") . " data-cpf='" . $row->cpf . "'></td>"; 
                     }
                     $result->close();
                 ?>
