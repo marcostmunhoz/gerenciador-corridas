@@ -86,8 +86,8 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-default col-sm-2 pull-right" type="reset">Limpar</button>
-        <button class="btn btn-primary col-sm-2 pull-right" type="submit">Submeter</button>
+        <button class="btn btn-default pull-right" type="reset">Limpar</button>
+        <button class="btn btn-primary pull-right" type="submit">Submeter</button>
     </fieldset>
 </form>
 <hr>
@@ -132,15 +132,22 @@
     $("#motoristas").addClass("active");
     $("input[name=cpf]").focusout(function() {
         let value = $(this).val();
-        $.ajax({url: "./php_scripts/check_duplicate.php", data: { tabela: "tb_motorista", cpf: value }, type: "POST", cache: false}).done(function(data) {
-            console.log(data);
-            if (data == -1) {
-                //erro
-            } else if (data > 0) {
-                $("#erro-modal").modal("show");
-                $("form").get(0).reset();
-            } 
-        })
+        $(".loading").css("display", "block");
+        $.ajax({
+            url: "./php_scripts/check_duplicate.php", 
+            data: { tabela: "motorista", cpf: value }, 
+            type: "POST", 
+            cache: false, 
+            success: function(data) {
+                if (data > 0) {
+                    $("#erro-modal").modal("show");
+                    $("form").get(0).reset();
+                }
+            },
+            complete: function() {
+                $(".loading").css("display", "none");
+            }
+        });
     });
     $("table input[type=checkbox]").change(function() {
         $("input[type=hidden][name=cpf]").val($(this).attr("data-cpf"));

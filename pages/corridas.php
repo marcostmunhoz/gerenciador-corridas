@@ -103,8 +103,8 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-default col-sm-2 pull-right" type="reset">Limpar</button>
-        <button class="btn btn-primary col-sm-2 pull-right" type="submit">Submeter</button>
+        <button class="btn btn-default pull-right" type="reset">Limpar</button>
+        <button class="btn btn-primary pull-right" type="submit">Submeter</button>
     </fieldset>
 </form>
 <hr>

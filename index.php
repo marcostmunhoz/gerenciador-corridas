@@ -11,9 +11,10 @@
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container container-fluid col-md-10 col-md-offset-1 col-xs-12">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
+        <div class="loading">Loading&#8230;</div>
+        <div class="container container-fluid col-xs-12">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-xs-12">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar1">
                             <span class="icon-bar"></span>
@@ -23,7 +24,7 @@
                         <a class="navbar-brand" href="./" style="padding:10px;"><img src="images/brand.png" width="30px" height="30px"></a>
                     </div>
                     <div class="collapse navbar-collapse" id="navbar1">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav navbar-right">
                             <li id="motoristas"><a href="./?page=motoristas">Motoristas</a></li>
                             <li id="passageiros"><a href="./?page=passageiros">Passageiros</a></li>
                             <li id="corridas"><a href="./?page=corridas">Corridas</a></li>
@@ -31,7 +32,7 @@
                     </div>
                 </div>
             </nav>
-            <div class="container col-xs-12" id="content">
+            <div class="container col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-xs-12" id="content">
                 <?php                    
                     require_once("php_scripts/setup.php");
                     $db = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWD, DB_NAME);                    
