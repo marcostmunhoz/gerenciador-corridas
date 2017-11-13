@@ -87,13 +87,13 @@
             </div>
         </div>
         <button class="btn btn-default pull-right" type="reset">Limpar</button>
-        <button class="btn btn-primary pull-right" type="submit">Submeter</button>
+        <button class="btn btn-primary pull-right" type="submit">Cadastrar</button>
     </fieldset>
 </form>
 <hr>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4>Motoristas cadastrados no sistema<h4>
+        <h5>Motoristas cadastrados no sistema<h5>
     </div>
     <form class="table-responsive" method="POST" id="tabela_form">
         <input type="hidden" name="cpf">
