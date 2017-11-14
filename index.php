@@ -34,10 +34,10 @@
             </nav>
             <div class="container col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-xs-12" id="content">
                 <?php                    
-                    require_once("php_scripts/setup.php");
-                    $db = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWD, DB_NAME);                    
-                    $db->query("SET NAMES 'utf8'");
-                    if (isset($_GET["page"])) {
+                    require_once("php_scripts/setup.php"); // Adiciona o script com as configurações do banco de dados
+                    $db = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWD, DB_NAME); // Realiza a conexão com o banco                   
+                    $db->query("SET NAMES 'utf8'"); 
+                    if (isset($_GET["page"])) { // Verifica o parametro para incluir a pagina correspondente
                         $page = $_GET["page"];
                         if ($page == "motoristas") {
                             include("pages/motoristas.php");
@@ -46,10 +46,10 @@
                         } else if ($page == "corridas") {
                             include("pages/corridas.php");
                         } else {
-                            include("pages/error.php");
+                            include("pages/error.php"); // Caso seja fornecido um parametro inexistente, direciona para uma pagina de erro
                         }
                     } else {
-                        include("pages/main.php");
+                        include("pages/main.php"); // Caso não seja fornecido nenhum parametro, direciona para a pagina principal
                     }
                 ?>
             </div>

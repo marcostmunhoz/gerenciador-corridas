@@ -8,7 +8,7 @@
             if (!$statement->execute()) {
                 echo "Erro na inclusão";
             } else {
-                $insert_id = $db->insert_id;
+                $insert_id = $db->insert_id; // Armazena o ultimo id de inserção, correspondente a ultima corrida
                 $statement = $db->prepare("INSERT INTO tb_corrida_passageiro (id_corrida, id_passageiro) VALUES (?, ?)");
                 foreach($_POST["passageiro"] as &$passageiro) {
                     if ($passageiro != "-1") {
@@ -61,11 +61,12 @@
                 <select name="passageiro[]" class="form-control" required>                    
                     <option value="-1">-----</option>
                     <?php
+                        // Popula o select com os passageiros cadastrados no banco de dados
                         $passageiros = $db->query("SELECT * FROM tb_passageiro ORDER BY nome");
                         while ($passageiro = $passageiros->fetch_object()) {
                             echo "<option value='" . $passageiro->id . "'>" . $passageiro->nome . " - " . $passageiro->cpf . "</option>";
                         }
-                        $passageiros->free_result();
+                        $passageiros->close();
                     ?>
                 </select>
             </div>
@@ -147,25 +148,14 @@
 </div>
 <script type="text/javascript">
     $("#corridas").addClass("active");
-    $("input[name=cpf]").focusout(function() {
-        let value = $(this).val();
-        $.ajax({url: "./php_scripts/check_duplicate.php", data: { tabela: "tb_passageiro", cpf: value }, type: "POST", cache: false}).done(function(data) {
-            console.log(data);
-            if (data == -1) {
-                //erro
-            } else if (data > 0) {
-                $("#erro-modal").modal("show");
-                $("form").get(0).reset();
-            } 
-        })
-    });
-    $("#passageiro1 select").change(function() {
+    $("#passageiro1 select").change(function() { // Metodo disparado quando o item selecionado é alterado
         $("#passageiro2 select, #passageiro3 select, #passageiro4 select").each(function(index, el) {
             disableSelect(el);
         });
         let selected = $(this).children("option:selected");
         if (selected.val() != "-1") {
-            $("#passageiro2 select").empty().attr("disabled", false).append($(this).children(":not(:selected)").clone());
+            $("#passageiro2 select").empty().attr("disabled", false).append($(this).children(":not(:selected)").clone()); // Popula o proximo select com os passageiros 
+            // disponiveis (exclui os que ja foram selecionados anteriormente)
         } 
     });
     $("#passageiro2 select").change(function() {
@@ -196,7 +186,7 @@
             disableSelect(el);
         });
     });
-    function disableSelect(select) {
+    function disableSelect(select) { // Função auxiliar para desabilitar e resetar o elemento select
         select.selectedIndex = 0;
         select.disabled = true;
     }

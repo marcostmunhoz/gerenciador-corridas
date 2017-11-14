@@ -13,9 +13,9 @@
             } else {
                 echo "Erro na preparação dos parametros.";
             }
-        } else {
+        } else { // Executará quando os checkboxes forem alterados
             $statement = $db->prepare("UPDATE tb_motorista SET status = ? WHERE cpf = ?");
-            if ($statement->bind_param("is", $state, $_POST["cpf"])) {
+            if ($statement->bind_param("is", $state, $_POST["cpf"])) { 
                 if (!$statement->execute()) {
                     echo "Erro na atualização";
                 }

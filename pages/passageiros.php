@@ -1,12 +1,12 @@
 <?php 
-    if ($db->connect_errno) {
+    if ($db->connect_errno) { // Verifica se existe algum erro de conexão com o banco de dados
         echo "Erro na conexão com o banco de dados.";
     }
-    if (isset($_POST["cpf"]) && isset($_POST["nome"]) && isset($_POST["sexo"]) && isset($_POST["nascimento"])) {
-        $state = isset($_POST["ativo"]) ? 1 : 0;
-        $statement = $db->prepare("INSERT INTO tb_passageiro (cpf, nome, data_nasc, sexo) VALUES (?, ?, ?, ?)");
-        if ($statement->bind_param("ssss", $_POST["cpf"], $_POST["nome"], $_POST["nascimento"], $_POST["sexo"])) {
-            if (!$statement->execute()) {
+    if (isset($_POST["cpf"]) && isset($_POST["nome"]) && isset($_POST["sexo"]) && isset($_POST["nascimento"])) { // Verifica se todos os parametros foram fornecidos
+        $state = isset($_POST["ativo"]) ? 1 : 0; // Converte a informação em "bool"
+        $statement = $db->prepare("INSERT INTO tb_passageiro (cpf, nome, data_nasc, sexo) VALUES (?, ?, ?, ?)"); // Prepara a query para inserção
+        if ($statement->bind_param("ssss", $_POST["cpf"], $_POST["nome"], $_POST["nascimento"], $_POST["sexo"])) { // Atribui os valores ao statement e verifica a ocorrência de erros
+            if (!$statement->execute()) { // Executa a query e verifica a ocorrência de erros
                 echo "Erro na inclusão";
             }
         } else {
@@ -83,39 +83,39 @@
             </thead>
             <tbody>
                 <?php
-                    $result = $db->query("SELECT * FROM tb_passageiro ORDER BY nome");
+                    $result = $db->query("SELECT * FROM tb_passageiro ORDER BY nome"); // Executa uma query e armazena o resultado
                     $index = 1;
-                    while ($row = $result->fetch_object()) {
+                    while ($row = $result->fetch_object()) { // Faz um loop por todas as linhas do resultado, associando a variavel a cada uma delas
                         echo "<tr><th scope='row'>" . $index++ . "</th>";
-                        echo "<td>" . $row->cpf . "</td>";
+                        echo "<td>" . $row->cpf . "</td>"; // Acessa o campo
                         echo "<td>" . $row->nome . "</td>";
                         echo "<td>" . ($row->sexo == "M" ? "Masculino" : "Feminino") . "</td>";
-                        echo "<td>" . date("d/m/Y", strtotime($row->data_nasc)) . "</td>";
+                        echo "<td>" . date("d/m/Y", strtotime($row->data_nasc)) . "</td>"; // Converte o valor em data e formata para o padrão brasileiro
                     }
-                    $result->close();
+                    $result->close(); // Libera o resultado
                 ?>
             </tbody>
         </table>
     </form>
 </div>
 <script type="text/javascript">
-    $("#passageiros").addClass("active");
-    $("input[name=cpf]").focusout(function() {
+    $("#passageiros").addClass("active"); // Marca a guia como ativa
+    $("input[name=cpf]").focusout(function() { // Evento disparado quando o foco sai do campo CPF
         let value = $(this).val();
-        $(".loading").css("display", "block");
-        $.ajax({
+        $(".loading").css("display", "block"); // Exibe um overlay bloqueando a interação durante o processamento
+        $.ajax({ // Chamada para o arquivo check_duplicate.php para verificar se o CPF ja existe no banco
             url: "./php_scripts/check_duplicate.php", 
             data: { tabela: "passageiro", cpf: value }, 
             type: "POST", 
             cache: false, 
             success: function(data) {
-                if (data > 0) {
+                if (data > 0) { // Caso ele já exista, o form é resetado e é exibido um modal informando que o registro já existe
                     $("#erro-modal").modal("show");
                     $("form").get(0).reset();
                 }
             },
             complete: function() {
-                $(".loading").css("display", "none");
+                $(".loading").css("display", "none"); // Oculta o overlay
             }
         });
     });
