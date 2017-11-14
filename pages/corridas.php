@@ -48,7 +48,7 @@
                     <?php
                         $motoristas = $db->query("SELECT * FROM tb_motorista WHERE status = 1 ORDER BY nome");
                         while ($motorista = $motoristas->fetch_object()) {
-                            echo "<option value='" . $motorista->id . "'>" . $motorista->nome . " - " . $motorista->cpf . "</option>";
+                            echo "<option value='" . $motorista->id . "'>" . $motorista->nome . " - " . mask($motorista->cpf) . "</option>";
                         }
                         $motoristas->free_result();
                     ?>
@@ -64,7 +64,7 @@
                         // Popula o select com os passageiros cadastrados no banco de dados
                         $passageiros = $db->query("SELECT * FROM tb_passageiro ORDER BY nome");
                         while ($passageiro = $passageiros->fetch_object()) {
-                            echo "<option value='" . $passageiro->id . "'>" . $passageiro->nome . " - " . $passageiro->cpf . "</option>";
+                            echo "<option value='" . $passageiro->id . "'>" . $passageiro->nome . " - " . mask($passageiro->cpf) . "</option>";
                         }
                         $passageiros->close();
                     ?>
@@ -135,7 +135,7 @@
                         $passageiros = $db->query("SELECT * FROM tb_corrida_passageiro AS tb_A JOIN tb_passageiro AS tb_B ON " .
                             "tb_A.id_passageiro = tb_B.id WHERE tb_A.id_corrida = " . $corrida->id_corrida);
                         while ($passageiro = $passageiros->fetch_object()) {
-                            echo "<tr><td>" . $passageiro->cpf . "</td><td>" . $passageiro->nome . "</td></td>";
+                            echo "<tr><td>" . mask($passageiro->cpf) . "</td><td>" . $passageiro->nome . "</td></td>";
                         }
                         $passageiros->close();
                         echo "</tbody></table></td></tr>";

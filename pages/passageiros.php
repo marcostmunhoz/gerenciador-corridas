@@ -87,7 +87,7 @@
                     $index = 1;
                     while ($row = $result->fetch_object()) { // Faz um loop por todas as linhas do resultado, associando a variavel a cada uma delas
                         echo "<tr><th scope='row'>" . $index++ . "</th>";
-                        echo "<td>" . $row->cpf . "</td>"; // Acessa o campo
+                        echo "<td>" . mask($row->cpf) . "</td>"; // Acessa o campo
                         echo "<td>" . $row->nome . "</td>";
                         echo "<td>" . ($row->sexo == "M" ? "Masculino" : "Feminino") . "</td>";
                         echo "<td>" . date("d/m/Y", strtotime($row->data_nasc)) . "</td>"; // Converte o valor em data e formata para o padrão brasileiro
